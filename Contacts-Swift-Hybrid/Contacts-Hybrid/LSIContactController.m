@@ -36,6 +36,7 @@
     // I need to import our Swift code into Objective-C
     Contact *myself = [[Contact alloc] initWithName:@"Alex Shillingford" relationship:@"Myself"];
     
+    [self.internalContacts addObjectsFromArray:@[myself]];
 }
 
 // NSArray = immutable (let array = [3, 4, 5]) ie: constant

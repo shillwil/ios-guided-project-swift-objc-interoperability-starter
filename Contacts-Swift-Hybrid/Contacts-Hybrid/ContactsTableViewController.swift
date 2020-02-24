@@ -8,8 +8,15 @@
 
 import UIKit
 
+// TableVC (Swift)
+// ContactController (Objc)
+// Contact (Swift)
+
 
 class ContactsTableViewController: UITableViewController {
+    
+    // We need to expose the Objc code files to Swift using the bridging header
+    var contactController = LSIContactController()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -23,13 +30,18 @@ class ContactsTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		
-		return 10
+        return contactController.contacts.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
+        
+        if let contact = contactController.contacts[indexPath.row] as? Contact {
+            cell.textLabel?.text = contact.name
+            cell.detailTextLabel?.text = contact.relationship
+        }
 		
-		cell.textLabel?.text = "HI"
+        
 		
 		return cell
 	}
